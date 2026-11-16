@@ -45,6 +45,14 @@ Pengujian terhadap 123 sampel data uji menghasilkan perbandingan metrik evaluasi
 | **3. Logistic Regression + SMOTE** | 0,8130 | 0,7143 | **0,6579** | 0,6849 | **0,8703** |
 | 4. Random Forest + SMOTE | 0,7967 | 0,6970 | 0,6053 | 0,6479 | 0,8189 |
 
+**Gambar 1. Perbandingan Kurva ROC-AUC Keempat Skenario Model**
+
+![Kurva ROC-AUC Prediksi Kelayakan Pinjaman](roc_curve.png)
+
+**Gambar 2. Perbandingan Confusion Matrix Sebelum dan Sesudah SMOTE**
+
+![Confusion Matrix Tanpa vs Dengan SMOTE](confusion_matrix.png)
+
 Berdasarkan Tabel 1, diperoleh tiga temuan utama:
 1. **Peningkatan Sensitivitas (*Recall*) Kelas Berisiko:** Sebelum penerapan SMOTE, kedua model memiliki nilai *Recall* yang rendah (0,5789 pada *Logistic Regression* dan 0,5526 pada *Random Forest*), yang berarti lebih dari 42% pengajuan berisiko gagal terdeteksi. Setelah penerapan SMOTE, *Recall* meningkat signifikan menjadi **0,6579** pada *Logistic Regression* (+7,90%) dan **0,6053** pada *Random Forest* (+5,27%).
 2. **Fenomena *Precision-Recall Trade-off*:** Kenaikan *Recall* setelah SMOTE diikuti oleh penurunan *Precision* (dari 0,9565 menjadi 0,7143 pada *Logistic Regression*) dan *Accuracy* (dari 0,8618 menjadi 0,8130). Hal ini terjadi karena pergeseran batas keputusan (*decision boundary*) membuat model lebih agresif menandai pengajuan yang meragukan sebagai kelas berisiko.
