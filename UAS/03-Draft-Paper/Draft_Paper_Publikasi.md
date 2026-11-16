@@ -1,13 +1,13 @@
 # Komparasi Algoritma Random Forest dan Logistic Regression dengan Teknik SMOTE untuk Prediksi Risiko Gagal Bayar Pinjaman
 
 **Dimas Galih Giovan**  
-Program Studi Teknik Informatika, UPN "Veteran" Jawa Timur  
-Email: 23081010169@student.upnjatim.ac.id
+Program Studi Informatika, UPN "Veteran" Jawa Timur  
+Email: 23081010169@student.ac.id
 
 ---
 
 ## Abstrak
-Ketidakseimbangan distribusi kelas (*class imbalance*) pada data historis pengajuan kredit sering menyebabkan algoritma klasifikasi gagal mendeteksi pemohon berisiko tinggi. Penelitian ini membandingkan kinerja algoritma linear (*Logistic Regression*) dan berbasis pohon (*Random Forest*) dalam memprediksi risiko kelayakan pinjaman menggunakan dataset *Loan Prediction* (614 data pengajuan dengan proporsi 68,73% disetujui dan 31,27% ditolak/berisiko). Teknik *Synthetic Minority Over-sampling Technique* (SMOTE) diterapkan secara ketat pada data latih setelah pemisahan rasio 80:20 untuk mencegah kebocoran data (*data leakage*). Hasil pengujian menunjukkan bahwa penerapan SMOTE meningkatkan sensitivitas (*Recall*) deteksi kelas berisiko dari `[ISI_ANGKA]` menjadi `[ISI_ANGKA]` pada model *Random Forest*, dengan nilai *F1-Score* sebesar `[ISI_ANGKA]` dan *ROC-AUC* sebesar `[ISI_ANGKA]`.
+Ketidakseimbangan distribusi kelas (*class imbalance*) pada data historis pengajuan kredit sering menyebabkan algoritma klasifikasi gagal mendeteksi pemohon berisiko tinggi. Penelitian ini membandingkan kinerja algoritma linear (*Logistic Regression*) dan berbasis pohon (*Random Forest*) dalam memprediksi risiko kelayakan pinjaman menggunakan dataset *Loan Prediction* (614 data pengajuan dengan proporsi 68,73% disetujui dan 31,27% ditolak/berisiko). Teknik *Synthetic Minority Over-sampling Technique* (SMOTE) diterapkan secara ketat pada data latih setelah pemisahan rasio 80:20 untuk mencegah kebocoran data (*data leakage*). Hasil pengujian menunjukkan bahwa penerapan SMOTE meningkatkan sensitivitas (*Recall*) deteksi kelas berisiko dari **0,5789 menjadi 0,6579** pada *Logistic Regression* serta dari **0,5526 menjadi 0,6053** pada *Random Forest*. Skenario **Logistic Regression + SMOTE** mencapai kemampuan pemisahan kelas terbaik dengan nilai **ROC-AUC sebesar 0,8703**, sedangkan **Logistic Regression tanpa SMOTE** mempertahankan **Accuracy tertinggi sebesar 0,8618** dan **F1-Score sebesar 0,7213**.
 
 **Kata Kunci:** *Credit Risk Prediction, Imbalanced Data, Logistic Regression, Random Forest, SMOTE.*
 
@@ -40,17 +40,20 @@ Pengujian terhadap 123 sampel data uji menghasilkan perbandingan metrik evaluasi
 
 | Skenario Model | Accuracy | Precision (Risiko) | Recall (Risiko) | F1-Score (Risiko) | ROC-AUC |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Logistic Regression (Tanpa SMOTE) | `0.8618` | `0.9565` | `0.5789` | `0.7213` | `0.8486` |
-| Random Forest (Tanpa SMOTE) | `0.8455` | `0.9130` | `0.5526` | `0.6885` | `0.8195` |
-| Logistic Regression + SMOTE | `0.8130` | `0.7143` | `0.6579` | `0.6849` | `0.8703` |
-| **Random Forest + SMOTE** | **`0.7967`** | **`0.6970`** | **`0.6053`** | **`0.6479`** | **`0.8189`** |
+| 1. Logistic Regression (Tanpa SMOTE) | **0,8618** | **0,9565** | 0,5789 | **0,7213** | 0,8486 |
+| 2. Random Forest (Tanpa SMOTE) | 0,8455 | 0,9130 | 0,5526 | 0,6885 | 0,8195 |
+| **3. Logistic Regression + SMOTE** | 0,8130 | 0,7143 | **0,6579** | 0,6849 | **0,8703** |
+| 4. Random Forest + SMOTE | 0,7967 | 0,6970 | 0,6053 | 0,6479 | 0,8189 |
 
-Hasil eksperimen menunjukkan bahwa tanpa SMOTE, model cenderung mempertahankan *Accuracy* tinggi dengan mengorbankan *Recall* pada kelas berisiko. Penerapan SMOTE pada data latih berhasil menggeser batas keputusan (*decision boundary*) model sehingga lebih sensitif mengenali pengajuan pinjaman yang berisiko gagal bayar.
+Berdasarkan Tabel 1, diperoleh tiga temuan utama:
+1. **Peningkatan Sensitivitas (*Recall*) Kelas Berisiko:** Sebelum penerapan SMOTE, kedua model memiliki nilai *Recall* yang rendah (0,5789 pada *Logistic Regression* dan 0,5526 pada *Random Forest*), yang berarti lebih dari 42% pengajuan berisiko gagal terdeteksi. Setelah penerapan SMOTE, *Recall* meningkat signifikan menjadi **0,6579** pada *Logistic Regression* (+7,90%) dan **0,6053** pada *Random Forest* (+5,27%).
+2. **Fenomena *Precision-Recall Trade-off*:** Kenaikan *Recall* setelah SMOTE diikuti oleh penurunan *Precision* (dari 0,9565 menjadi 0,7143 pada *Logistic Regression*) dan *Accuracy* (dari 0,8618 menjadi 0,8130). Hal ini terjadi karena pergeseran batas keputusan (*decision boundary*) membuat model lebih agresif menandai pengajuan yang meragukan sebagai kelas berisiko.
+3. **Keunggulan Model Linear pada Dataset Kecil:** *Logistic Regression* mengungguli *Random Forest* pada seluruh skenario. Pada dataset berdimensi kecil (614 baris), model linear memiliki generalisasi yang lebih stabil dibandingkan *Random Forest* yang cenderung lebih sensitif terhadap variasi sampel sintetis hasil interpolasi SMOTE.
 
 ---
 
 ## V. Kesimpulan dan Saran
-Penerapan teknik SMOTE secara terisolasi pada data latih efektif meningkatkan *Recall* dan *F1-Score* dalam mendeteksi risiko pinjaman, dengan performa terbaik diperoleh pada skenario **[Sebutkan Model Terbaik]**. Penelitian selanjutnya dapat mengeksplorasi algoritma *gradient boosting* (XGBoost/LightGBM) serta optimasi hiperparameter menggunakan *GridSearchCV*.
+Penerapan teknik SMOTE secara terisolasi pada data latih terbukti efektif meningkatkan *Recall* dalam mendeteksi risiko gagal bayar pinjaman serta meningkatkan nilai *ROC-AUC* pada model linear. Untuk skenario yang memprioritaskan minimalisasi risiko gagal bayar dan pemisahan probabilitas terbaik, kombinasi **Logistic Regression + SMOTE** direkomendasikan dengan capaian **Recall 0,6579** dan **ROC-AUC 0,8703**. Sebaliknya, jika institusi memprioritaskan ketepatan persetujuan (*Precision* 0,9565) dan keseimbangan umum (*F1-Score* 0,7213), **Logistic Regression tanpa SMOTE** memberikan hasil paling optimal. Penelitian selanjutnya dapat mengeksplorasi penyesuaian ambang batas probabilitas (*threshold tuning*) dan metode *hybrid resampling* seperti SMOTE-Tomek.
 
 ---
 
