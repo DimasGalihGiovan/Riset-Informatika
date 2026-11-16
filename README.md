@@ -19,7 +19,7 @@ Repositori ini berisi dokumentasi lengkap tugas **UTS** dan **UAS** mata kuliah 
   1. `01-Dataset-Digunakan/` — Dataset mentah (`loan_data_raw.csv`) dan hasil *preprocessing* (`loan_data_cleaned.csv`).
   2. `02-Source-Code/` — Kode eksperimen Python/Google Colab (`eksperimen_loan_prediction.ipynb`).
   3. `03-Draft-Paper/` — Draf artikel publikasi ilmiah format IMRaD/IEEE.
-  4. `04-Presentasi/` — Materi progres mingguan untuk Minggu ke-13, 14, 15, dan 16.
+  4. `04-Presentasi/` — Materi slide presentasi akhir riset (`Presentasi_Riset_Loan_Prediction.md`).
 
 ## Sumber Dataset Utama
 * **Kaggle Loan Prediction Problem Dataset:** `https://www.kaggle.com/datasets/altruistdelhite04/loan-prediction-problem-dataset` (file `train_u6lujuX_CVtuZ9i.csv` diunduh dan disimpan sebagai `loan_data_raw.csv`).
